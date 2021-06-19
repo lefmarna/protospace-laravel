@@ -1,0 +1,44 @@
+version: "3"
+
+# DockerVolumeを使うと、コンテナを削除してもデータが残るので便利
+volumes:
+  mysql:
+  phpmyadmin:
+
+services:
+  web:
+    build: .
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/var/www/html
+    environment:
+      DB_PASSWORD: ${DATABASE_PASSWORD}
+    # stdin_openとttyで -it オプションと同じ意味を持つ
+    stdin_open: true
+    tty: true
+    # dbを立ち上げてからwebを立ち上げる
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    # 3306のポートはMySQLが使用しているので、5306を当てている
+    ports:
+      - "5306:3306"
+    volumes:
+      - "mysql:/var/lib/mysql"
+    # パスワードを設定しておかないと、MySQLのコンテナがUpにならない
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - 8088:80
+    volumes:
+      - "phpmyadmin:/sessions"
