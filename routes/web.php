@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', 'PrototypeController@index');
+Route::get('/', 'PrototypeController@index')->name('root');
 
 Auth::routes();
