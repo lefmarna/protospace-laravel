@@ -11,11 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PrototypeController@index');
 
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-Route::get('prototypes', 'PrototypeController@index');
