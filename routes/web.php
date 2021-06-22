@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PrototypeController@index')->name('root');
+
+Route::resource('prototypes', 'PrototypeController')->only([
+  'create', 'store'
+]);
+
+Auth::routes();
