@@ -9,7 +9,9 @@
     </div>
     @endauth
     <div class="card__wrapper">
-      {{-- <%# 投稿機能実装後、部分テンプレートでプロトタイプ投稿一覧を表示する %> --}}
+      @foreach ($prototypes as $prototype)
+        @include('prototypes.prototype')
+      @endforeach
     </div>
   </div>
 </main>

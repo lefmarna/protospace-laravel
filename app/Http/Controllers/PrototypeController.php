@@ -11,7 +11,9 @@ class PrototypeController extends Controller
 {
     //
     public function index() {
-        return view('prototypes.index');
+        // withを使うことでN+1問題を解消する
+        $prototypes = Prototype::with('user')->get();
+        return view('prototypes.index', compact('prototypes'));
     }
 
     public function create() {
