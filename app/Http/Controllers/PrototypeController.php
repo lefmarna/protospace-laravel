@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StorePrototype;
 
 use App\Models\Prototype;
-
 class PrototypeController extends Controller
 {
     //
@@ -18,7 +18,7 @@ class PrototypeController extends Controller
         return view('prototypes.create');
     }
 
-    public function store(Request $request) {
+    public function store(StorePrototype $request) {
         $prototype = new Prototype;
 
         $prototype->title = $request->input('title');
