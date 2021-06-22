@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Prototype;
 
@@ -23,9 +24,10 @@ class PrototypeController extends Controller
         $prototype->title = $request->input('title');
         $prototype->catch_copy = $request->input('catch_copy');
         $prototype->concept = $request->input('concept');
-        $prototype->user_id = $request->input('user_id');
+        // ログインしているユーザーのIDを保存する
+        $prototype->user_id = Auth::id();
 
-        $prototype.save();
+        $prototype->save();
 
         return redirect('/');
     }
