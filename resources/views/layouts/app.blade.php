@@ -47,7 +47,7 @@
                                             document.getElementById('logout-form').submit();">
                                 {{ __('ログアウト') }}
                             </a>
-                            <a class="nav__btn" href="{{ route('logout') }}">
+                            <a class="nav__btn" href="{{ route('prototypes.create') }}">
                                 {{ __('New Proto') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
