@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Prototype extends Model
 {
     //
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 }
