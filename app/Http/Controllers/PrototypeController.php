@@ -33,4 +33,9 @@ class PrototypeController extends Controller
 
         return redirect('/');
     }
+
+    public function show($id) {
+        $prototype = Prototype::find($id);
+        return view('prototypes.show', compact('prototype'));
+    }
 }

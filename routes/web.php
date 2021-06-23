@@ -14,7 +14,7 @@
 Route::get('/', 'PrototypeController@index')->name('root');
 
 Route::resource('prototypes', 'PrototypeController')->only([
-  'create', 'store'
+  'create', 'store', 'show'
 ]);
 
 Auth::routes();
