@@ -13,8 +13,8 @@
 
 Route::get('/', 'PrototypeController@index')->name('root');
 
-Route::resource('prototypes', 'PrototypeController')->only([
-  'create', 'store', 'show'
+Route::resource('prototypes', 'PrototypeController')->except([
+  'index'
 ]);
 
 Auth::routes();
