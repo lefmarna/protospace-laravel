@@ -8,12 +8,12 @@
         {{ $prototype->title }}
       </p>
       <a href="{{ route('root') }}" class="prototype__user">by {{$prototype->user->name}}</a>
-      {{-- <%# プロトタイプの投稿者とログインしているユーザーが同じであれば以下を表示する %>
+      @if ($prototype->user == Auth::user())
         <div class="prototype__manage">
-          <%= link_to "編集する", root_path, class: :prototype__btn %>
-          <%= link_to "削除する", root_path, class: :prototype__btn %>
+          <a href="{{ route('root') }}" class="prototype__btn">編集する</a>
+          <a href="{{ route('root') }}" class="prototype__btn">削除する</a>
         </div>
-      <%# // プロトタイプの投稿者とログインしているユーザーが同じであれば上記を表示する %> --}}
+      @endif
       <div class="prototype__image">
         {{-- <%= image_tag "プロトタイプの画像" %> --}}
       </div>
