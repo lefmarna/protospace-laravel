@@ -38,4 +38,9 @@ class PrototypeController extends Controller
         $prototype = Prototype::find($id);
         return view('prototypes.show', compact('prototype'));
     }
+
+    public function edit($id) {
+        $prototype = Prototype::find($id);
+        return view('prototypes.edit', compact('prototype'));
+    }
 }

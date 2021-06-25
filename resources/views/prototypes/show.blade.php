@@ -10,7 +10,7 @@
       <a href="{{ route('root') }}" class="prototype__user">by {{$prototype->user->name}}</a>
       @if ($prototype->user == Auth::user())
         <div class="prototype__manage">
-          <a href="{{ route('root') }}" class="prototype__btn">編集する</a>
+          <a href="{{ route('prototypes.edit', ['prototype' => $prototype->id]) }}" class="prototype__btn">編集する</a>
           <a href="{{ route('root') }}" class="prototype__btn">削除する</a>
         </div>
       @endif
