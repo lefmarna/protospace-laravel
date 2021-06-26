@@ -17,7 +17,8 @@ class PrototypeController extends Controller
     }
 
     public function create() {
-        return view('prototypes.create');
+        $prototype = new Prototype;
+        return view('prototypes.create', compact('prototype'));
     }
 
     public function store(StorePrototype $request) {
