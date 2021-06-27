@@ -11,7 +11,11 @@
       @if ($prototype->user == Auth::user())
         <div class="prototype__manage">
           <a href="{{ route('prototypes.edit', ['prototype' => $prototype->id]) }}" class="prototype__btn">編集する</a>
-          <a href="{{ route('root') }}" class="prototype__btn">削除する</a>
+          <form method="POST" action="{{ route('prototypes.destroy', ['prototype' => $prototype->id]) }}">
+            @csrf
+            <input type="submit" class="prototype__btn" value="削除する">
+            <input type="hidden" name="_method" value="DELETE">
+          </form>
         </div>
       @endif
       <div class="prototype__image">

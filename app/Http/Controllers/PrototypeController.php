@@ -48,6 +48,13 @@ class PrototypeController extends Controller
         return redirect('prototypes/' . $id);
     }
 
+    public function destroy($id) {
+        $prototype = Prototype::find($id);
+        $prototype->delete();
+
+        return redirect('/');
+    }
+
     private function prototypeParams($request, $prototype) {
         $prototype->title = $request->input('title');
         $prototype->catch_copy = $request->input('catch_copy');
