@@ -18,18 +18,13 @@ class PrototypeController extends Controller
 
     public function create() {
         $prototype = new Prototype;
-        return view('prototypes.create', compact('prototype'));
+        $action = 'store';
+        return view('prototypes.create', compact('prototype', 'action'));
     }
 
     public function store(PrototypeRequest $request) {
         $prototype = new Prototype;
-
-        $prototype->title = $request->input('title');
-        $prototype->catch_copy = $request->input('catch_copy');
-        $prototype->concept = $request->input('concept');
-        // ログインしているユーザーのIDを保存する
-        $prototype->user_id = Auth::id();
-
+        $prototype = $this->prototypeParams($request, $prototype);
         $prototype->save();
 
         return redirect('/');
@@ -42,6 +37,23 @@ class PrototypeController extends Controller
 
     public function edit($id) {
         $prototype = Prototype::find($id);
-        return view('prototypes.edit', compact('prototype'));
+        $action = 'update';
+        return view('prototypes.edit', compact('prototype', 'action'));
+    }
+
+    public function update(PrototypeRequest $request, $id) {
+        $prototype = Prototype::find($id);
+        $prototype = $this->prototypeParams($request, $prototype);
+        $prototype->save();
+        return redirect('prototypes/' . $id);
+    }
+
+    private function prototypeParams($request, $prototype) {
+        $prototype->title = $request->input('title');
+        $prototype->catch_copy = $request->input('catch_copy');
+        $prototype->concept = $request->input('concept');
+        // ログインしているユーザーのIDを保存する
+        $prototype->user_id = Auth::id();
+        return $prototype;
     }
 }
