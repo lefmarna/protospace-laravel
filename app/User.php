@@ -40,4 +40,8 @@ class User extends Authenticatable
     public function prototypes() {
         return $this->hasMany('App\Models\Prototype');
     }
+
+    public function comments() {
+        return $this->hasMany('App\Models\Comment');
+    }
 }
