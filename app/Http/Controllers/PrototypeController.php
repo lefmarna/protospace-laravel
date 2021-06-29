@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PrototypeRequest;
 
 use App\Models\Prototype;
+use App\Models\Comment;
 class PrototypeController extends Controller
 {
     //
@@ -32,7 +33,8 @@ class PrototypeController extends Controller
 
     public function show($id) {
         $prototype = Prototype::find($id);
-        return view('prototypes.show', compact('prototype'));
+        $comments = Comment::with('user')->get()->where('prototype_id', $prototype->id);
+        return view('prototypes.show', compact('prototype', 'comments'));
     }
 
     public function edit($id) {

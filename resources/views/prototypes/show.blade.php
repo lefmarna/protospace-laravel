@@ -48,11 +48,18 @@
             </div>
           </form>
         @endauth
+        @foreach ($comments as $comment)
+        <ul class="comments_lists">
+          <li class="comments_list">
+            {{ $comment->text }}
+            <a href="{{ route('root') }}" class="comment_user">{{ $comment->user->name }}</a>
+          </li>
+        </ul>
+        @endforeach
         {{-- <ul class="comments_lists">
           <%# 投稿に紐づくコメントを一覧する処理を記述する %>
             <li class="comments_list">
               {{ $comment }}
-              <a href="{{ route('root') }}" class="comment_user">（ ユーザー名 ）</a>
             </li>
           <%# // 投稿に紐づくコメントを一覧する処理を記述する %>
         </ul> --}}
