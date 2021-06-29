@@ -21,4 +21,8 @@ Route::resource('prototypes.comments', 'CommentController')->only([
   'store'
 ]);
 
+Route::resource('users', 'UserController')->only([
+  'show'
+]);
+
 Auth::routes();
