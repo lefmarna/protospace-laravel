@@ -37,10 +37,11 @@
       </div>
       <div class="prototype__comments">
         @auth
-          <form method="POST" action="" ></form>
+          <form method="POST" action="{{ route('prototypes.comments.store', ['prototype' => $prototype->id]) }}" >
+            @csrf
             <div class="field">
-              <label for="comment">コメント</label><br />
-              <input name="comment" id="comment" />
+              <label for="text">コメント</label><br />
+              <input type="text" name="text" id="text" value="{{ old('text') }}" />
             </div>
             <div class="actions">
               <input type="submit" class="form__btn" value="送信する" />
