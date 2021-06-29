@@ -17,4 +17,8 @@ Route::resource('prototypes', 'PrototypeController')->except([
   'index'
 ]);
 
+Route::resource('prototypes.comments', 'CommentController')->only([
+  'store'
+]);
+
 Auth::routes();
