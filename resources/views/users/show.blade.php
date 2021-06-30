@@ -31,7 +31,9 @@
         {{ $user->name }}さんのプロトタイプ
       </h2>
       <div class="user__card">
-        <%# 部分テンプレートでそのユーザーが投稿したプロトタイプ投稿一覧を表示する %>
+        @foreach ($user->prototypes as $prototype)
+          @include('prototypes.prototype')
+        @endforeach
       </div>
     </div>
   </div>
