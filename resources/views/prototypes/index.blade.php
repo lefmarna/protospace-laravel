@@ -5,7 +5,7 @@
   <div class="inner">
     @auth
     <div class="greeting">
-        こんにちは、<a href="{{ route('root') }}" class="greeting__link">{{ Auth::user()->name }}さん</a>
+        こんにちは、<a href="{{ route('users.show', ['user' => Auth::id()]) }}" class="greeting__link">{{ Auth::user()->name }}さん</a>
     </div>
     @endauth
     <div class="card__wrapper">

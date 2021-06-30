@@ -7,7 +7,7 @@
       <p class="prototype__hedding">
         {{ $prototype->title }}
       </p>
-      <a href="{{ route('root') }}" class="prototype__user">by {{$prototype->user->name}}</a>
+      <a href="{{ route('users.show', ['user' => $prototype->user->id]) }}" class="prototype__user">by {{$prototype->user->name}}</a>
       @if ($prototype->user == Auth::user())
         <div class="prototype__manage">
           <a href="{{ route('prototypes.edit', ['prototype' => $prototype->id]) }}" class="prototype__btn">編集する</a>
@@ -52,7 +52,7 @@
         <ul class="comments_lists">
           <li class="comments_list">
             {{ $comment->text }}
-            <a href="{{ route('root') }}" class="comment_user">{{ $comment->user->name }}</a>
+            <a href="{{ route('users.show', ['user' => $comment->user->id]) }}" class="comment_user">{{ $comment->user->name }}</a>
           </li>
         </ul>
         @endforeach
