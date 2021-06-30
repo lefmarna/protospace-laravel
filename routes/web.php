@@ -13,8 +13,16 @@
 
 Route::get('/', 'PrototypeController@index')->name('root');
 
-Route::resource('prototypes', 'PrototypeController')->only([
-  'create', 'store', 'show'
+Route::resource('prototypes', 'PrototypeController')->except([
+  'index'
+]);
+
+Route::resource('prototypes.comments', 'CommentController')->only([
+  'store'
+]);
+
+Route::resource('users', 'UserController')->only([
+  'show'
 ]);
 
 Auth::routes();

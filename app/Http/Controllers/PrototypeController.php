@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StorePrototype;
+use App\Http\Requests\PrototypeRequest;
 
 use App\Models\Prototype;
+use App\Models\Comment;
 class PrototypeController extends Controller
 {
     //
@@ -17,18 +18,14 @@ class PrototypeController extends Controller
     }
 
     public function create() {
-        return view('prototypes.create');
+        $prototype = new Prototype;
+        $action = 'store';
+        return view('prototypes.create', compact('prototype', 'action'));
     }
 
-    public function store(StorePrototype $request) {
+    public function store(PrototypeRequest $request) {
         $prototype = new Prototype;
-
-        $prototype->title = $request->input('title');
-        $prototype->catch_copy = $request->input('catch_copy');
-        $prototype->concept = $request->input('concept');
-        // ログインしているユーザーのIDを保存する
-        $prototype->user_id = Auth::id();
-
+        $prototype = $this->prototypeParams($request, $prototype);
         $prototype->save();
 
         return redirect('/');
@@ -36,6 +33,53 @@ class PrototypeController extends Controller
 
     public function show($id) {
         $prototype = Prototype::find($id);
-        return view('prototypes.show', compact('prototype'));
+        $comments = Comment::with('user')->get()->where('prototype_id', $prototype->id);
+        return view('prototypes.show', compact('prototype', 'comments'));
+    }
+
+    public function edit($id) {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+        $prototype = Prototype::find($id);
+        if ($prototype->user->id != Auth::id()) {
+            return redirect('/');
+        }
+        $action = 'update';
+        return view('prototypes.edit', compact('prototype', 'action'));
+    }
+
+    public function update(PrototypeRequest $request, $id) {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+        $prototype = Prototype::find($id);
+        if ($prototype->user->id != Auth::id()) {
+            return redirect('/');
+        }
+        $prototype = $this->prototypeParams($request, $prototype);
+        $prototype->save();
+        return redirect('prototypes/' . $id);
+    }
+
+    public function destroy($id) {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+        $prototype = Prototype::find($id);
+        if ($prototype->user->id != Auth::id()) {
+            return redirect('/');
+        }
+        $prototype->delete();
+        return redirect('/');
+    }
+
+    private function prototypeParams($request, $prototype) {
+        $prototype->title = $request->input('title');
+        $prototype->catch_copy = $request->input('catch_copy');
+        $prototype->concept = $request->input('concept');
+        // ログインしているユーザーのIDを保存する
+        $prototype->user_id = Auth::id();
+        return $prototype;
     }
 }

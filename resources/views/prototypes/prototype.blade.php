@@ -5,6 +5,6 @@
     <p class="card__summary">
       {{ $prototype->catch_copy }}
     </p>
-    <a href="{{ route('root') }}" class="card__user">by {{ $prototype->user->name }}</a>
+    <a href="{{ route('users.show', ['user' => $prototype->user->id]) }}" class="card__user">by {{ $prototype->user->name }}</a>
   </div>
 </div>
