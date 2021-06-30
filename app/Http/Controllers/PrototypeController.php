@@ -39,12 +39,18 @@ class PrototypeController extends Controller
 
     public function edit($id) {
         $prototype = Prototype::find($id);
+        if ($prototype->user->id != Auth::id()) {
+            return redirect('/');
+        }
         $action = 'update';
         return view('prototypes.edit', compact('prototype', 'action'));
     }
 
     public function update(PrototypeRequest $request, $id) {
         $prototype = Prototype::find($id);
+        if ($prototype->user->id != Auth::id()) {
+            return redirect('/');
+        }
         $prototype = $this->prototypeParams($request, $prototype);
         $prototype->save();
         return redirect('prototypes/' . $id);
@@ -52,8 +58,10 @@ class PrototypeController extends Controller
 
     public function destroy($id) {
         $prototype = Prototype::find($id);
+        if ($prototype->user->id != Auth::id()) {
+            return redirect('/');
+        }
         $prototype->delete();
-
         return redirect('/');
     }
 
