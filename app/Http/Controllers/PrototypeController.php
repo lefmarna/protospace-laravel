@@ -38,6 +38,9 @@ class PrototypeController extends Controller
     }
 
     public function edit($id) {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $prototype = Prototype::find($id);
         if ($prototype->user->id != Auth::id()) {
             return redirect('/');
@@ -47,6 +50,9 @@ class PrototypeController extends Controller
     }
 
     public function update(PrototypeRequest $request, $id) {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $prototype = Prototype::find($id);
         if ($prototype->user->id != Auth::id()) {
             return redirect('/');
@@ -57,6 +63,9 @@ class PrototypeController extends Controller
     }
 
     public function destroy($id) {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         $prototype = Prototype::find($id);
         if ($prototype->user->id != Auth::id()) {
             return redirect('/');
