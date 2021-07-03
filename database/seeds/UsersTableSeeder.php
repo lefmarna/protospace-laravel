@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::unprepared("ALTER TABLE prototypes AUTO_INCREMENT = 1 ");
+        DB::unprepared("ALTER TABLE users AUTO_INCREMENT = 1 ");
         DB::table('users')->insert([
             [
                 'name' => 'あああ',
