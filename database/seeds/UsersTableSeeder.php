@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
         DB::unprepared("ALTER TABLE users AUTO_INCREMENT = 1 ");
         DB::table('users')->insert([
             [
-                'id' => '1',
                 'name' => 'あああ',
                 'profile' => 'プロフィール',
                 'occupation' => '所属',
@@ -24,7 +23,6 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('password123'),
             ],
             [
-                'id' => '2',
                 'name' => 'いいい',
                 'profile' => 'ぷろふぃーる',
                 'occupation' => 'しょぞく',
@@ -33,7 +31,6 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('password123'),
             ],
             [
-                'id' => '3',
                 'name' => 'ううう',
                 'profile' => 'profile',
                 'occupation' => 'occupation',

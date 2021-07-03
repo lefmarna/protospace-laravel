@@ -12,6 +12,8 @@ class CommentSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('comments')->delete();
+        DB::unprepared("ALTER TABLE comments AUTO_INCREMENT = 1 ");
         factory(Comment::class, 3000)->create();
     }
 }
