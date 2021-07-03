@@ -12,6 +12,6 @@ class PrototypeSeeder extends Seeder
      */
     public function run()
     {
-        factory(Prototype::class, 100)->create();
+        factory(Prototype::class, 200)->create();
     }
 }
