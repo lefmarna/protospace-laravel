@@ -10,6 +10,6 @@ $factory->define(Prototype::class, function (Faker $faker) {
         'title' => $faker->realText(10),
         'catch_copy' => $faker->realText(50),
         'concept' => $faker->realText(85),
-        'user_id' => $faker->numberBetween($min = 1, $max = 2),
+        'user_id' => $faker->numberBetween($min = 1, $max = 4),
     ];
 });
